@@ -2,7 +2,7 @@ package Introduction;
 
 public class SubtractionOfTwoNumbers {
 
-    public static int minusTwoNumbers(int num1, int num2) {
+    public static int subTwoNumbers(int num1, int num2) {
 
         int answer = 0;
 
@@ -15,7 +15,7 @@ public class SubtractionOfTwoNumbers {
 
     public static void main(String[] args) {
 
-        System.out.println(minusTwoNumbers(2,-3));
-        System.out.println(minusTwoNumbers(100,-2));
+        System.out.println(subTwoNumbers(2,-3));
+        System.out.println(subTwoNumbers(100,-2));
     }
 }

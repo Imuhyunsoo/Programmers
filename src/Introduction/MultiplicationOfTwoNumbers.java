@@ -1,8 +1,8 @@
 package Introduction;
 
-public class ProductOfTwoNumbers {
+public class MultiplicationOfTwoNumbers {
 
-    public static int solution(int num1, int num2) {
+    public static int mulTwoNumbers(int num1, int num2) {
 
         int answer = 0;
 
@@ -15,7 +15,7 @@ public class ProductOfTwoNumbers {
 
     public static void main(String[] args) {
 
-        System.out.println(solution(27,19));
+        System.out.println(mulTwoNumbers(27,19));
     }
 
 }
