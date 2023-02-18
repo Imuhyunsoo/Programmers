@@ -6,8 +6,8 @@ public class SubtractionOfTwoNumbers {
 
         int answer = 0;
 
-        if(((num1 & num2) > -50000) & ((num1 & num2) > 50000)) {
-          answer = num1 - num2;
+        if((num1 >= -50000 & num2 <= 50000) & (num2 >= -50000 & num2 <= 50000)) {
+            answer = num1 - num2;
         }
 
         return answer;
@@ -16,7 +16,7 @@ public class SubtractionOfTwoNumbers {
     public static void main(String[] args) {
 
         // TEST CODE
-        System.out.println(subTwoNumbers(2,-3));
-        System.out.println(subTwoNumbers(100,-2));
+        System.out.println(subTwoNumbers(2,3));
+        System.out.println(subTwoNumbers(100,2));
     }
 }
