@@ -15,6 +15,7 @@ public class SubtractionOfTwoNumbers {
 
     public static void main(String[] args) {
 
+        // TEST CODE
         System.out.println(subTwoNumbers(2,-3));
         System.out.println(subTwoNumbers(100,-2));
     }

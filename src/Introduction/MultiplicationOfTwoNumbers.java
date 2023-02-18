@@ -15,6 +15,8 @@ public class MultiplicationOfTwoNumbers {
 
     public static void main(String[] args) {
 
+        // TEST CODE
+        System.out.println(mulTwoNumbers(3,4));
         System.out.println(mulTwoNumbers(27,19));
     }
 

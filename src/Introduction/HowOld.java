@@ -2,7 +2,7 @@ package Introduction;
 
 public class HowOld {
 
-    public static int yourOfBirth(int age) {
+    public static int yearOfBirth(int age) {
 
         final int THIS_YEAR = 2022;
         int answer = 0;
@@ -16,7 +16,7 @@ public class HowOld {
     public static void main(String[] args) {
 
         // TEST CODE
-        System.out.println(yourOfBirth(40));
-        System.out.println(yourOfBirth(23));
+        System.out.println(yearOfBirth(40));
+        System.out.println(yearOfBirth(23));
     }
 }
