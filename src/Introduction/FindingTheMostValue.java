@@ -31,6 +31,7 @@ public class FindingTheMostValue {
 
         int[] array;
 
+        // TEST CODE
         array = new int[]{1, 2, 3, 3, 3, 4};
         System.out.println(getMostFrequentValue(array));
         array = new int[]{1, 1, 2, 2};

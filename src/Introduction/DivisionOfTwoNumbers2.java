@@ -7,6 +7,7 @@ public class DivisionOfTwoNumbers2 {
         int answer = 0;
         double result;
 
+        // Restrictions
         if((num1 > 0 & num1 <= 100) & (num2 > 0 & num2 <= 100)) {
             result = (double) num1 / num2;
             answer = (int) (result * 1000);

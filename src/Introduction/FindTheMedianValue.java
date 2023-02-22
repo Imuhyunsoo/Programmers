@@ -27,9 +27,9 @@ public class FindTheMedianValue {
 
     public static void main(String[] args) {
 
-        // TEST CODE
         int[] array;
 
+        // TEST CODE
         array = new int[] {1, 2, 7, 10, 11};
         System.out.println(getMedianValue(array));
         array = new int[] {9, -1, 0};

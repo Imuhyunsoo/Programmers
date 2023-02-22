@@ -7,6 +7,7 @@ public class HowOld {
         final int THIS_YEAR = 2022;
         int answer = 0;
 
+        // Restrictions
         if(age > 0 & age <= 120) {
             answer = THIS_YEAR - (age - 1);
         }

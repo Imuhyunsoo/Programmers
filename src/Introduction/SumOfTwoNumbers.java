@@ -6,6 +6,7 @@ public class SumOfTwoNumbers {
 
         int answer = 0;
 
+        // Restrictions
         if((num1 >= -50000 & num2 <= 50000) & (num2 >= -50000 & num2 <= 50000)) {
             answer = num1 + num2;
         }
