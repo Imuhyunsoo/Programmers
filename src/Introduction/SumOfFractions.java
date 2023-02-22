@@ -59,6 +59,8 @@ public class SumOfFractions {
         // TEST CODE
         System.out.println(Arrays.toString(sum(1, 2, 3, 4)));
         System.out.println(Arrays.toString(sum(9, 2, 1, 3)));
+        System.out.println(Arrays.toString(sum(1, 4, 3, 4)));
+
     }
 
 }
