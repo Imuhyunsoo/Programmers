@@ -4,19 +4,16 @@ import java.util.Arrays;
 
 public class SumOfFractions {
 
-    public static int[] simplify(int[] array, int n) {
+    public static void simplify(int[] array, int n) {
 
-        if((array[0] % n == 0) & (array[1] % n == 0)) {
+        while (n <= Math.sqrt(Math.max(array[0], array[1]))) {
 
-            array[0] /= n;
-            array[1] /= n;
-        }
-
-        if(n == 1000) {
-            return array;
-        }
-        else {
-            return simplify(array, ++n);
+            if((array[0] % n == 0) & (array[1] % n == 0)) {
+                array[0] /= n;
+                array[1] /= n;
+            } else {
+                n++;
+            }
         }
     }
 
@@ -29,29 +26,18 @@ public class SumOfFractions {
             & (numer1 < 1000) & (denom1 < 1000) & (numer2 < 1000) & (denom2 < 1000)) {
 
             if(denom1 != denom2) {
-                if((denom1 > denom2) & (denom1 % denom2 == 0)) {
-                    numer2 *= (double) denom1 / denom2;
-                    answer[0] = numer1 + numer2;
-                    answer[1] = denom1;
-                }
-                else if((denom1 < denom2) & (denom2 % denom1 == 0)) {
-                    numer1 *= (double) denom2 / denom1;
-                    answer[0] = numer1 + numer2;
-                    answer[1] = denom2;
-                }
-                else {
                     numer1 *= denom2;
                     numer2 *= denom1;
                     answer[0] = numer1 + numer2;
                     answer[1] = denom1 * denom2;
-                }
             }
             else {
                 answer[0] = numer1 + numer2;
                 answer[1] = denom1;
             }
         }
-        return simplify(answer,2);
+        simplify(answer,2);
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -60,6 +46,7 @@ public class SumOfFractions {
         System.out.println(Arrays.toString(sum(1, 2, 3, 4)));
         System.out.println(Arrays.toString(sum(9, 2, 1, 3)));
         System.out.println(Arrays.toString(sum(1, 4, 3, 4)));
+        System.out.println(Arrays.toString(sum(511, 512, 1, 512)));
 
     }
 

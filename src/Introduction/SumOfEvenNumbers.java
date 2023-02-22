@@ -3,6 +3,7 @@ package Introduction;
 public class SumOfEvenNumbers {
 
     /***
+     * best answer
     public int solution(int n) {
         int answer = 0;
 
@@ -11,7 +12,8 @@ public class SumOfEvenNumbers {
         }
 
         return answer;
-    } ***/
+    }
+     ***/
 
     public static int totalSumEvenNumbers(int n) {
 
