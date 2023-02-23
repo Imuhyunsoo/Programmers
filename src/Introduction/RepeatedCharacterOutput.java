@@ -6,6 +6,7 @@ public class RepeatedCharacterOutput {
 
         StringBuilder answer = new StringBuilder();
 
+        // Restrictions
         if(my_string.length() >= 2 & my_string.length() <= 5 & n >= 2 & n <= 10) {
 
             for(int i = 0; i < my_string.length(); i++) {
