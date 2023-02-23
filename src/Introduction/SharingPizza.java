@@ -7,6 +7,7 @@ public class SharingPizza {
         int answer = 0;
         int quotient;
 
+        // Restrictions
         if(n >= 1 & n <= 100) {
 
             quotient = n / 7;

@@ -17,6 +17,7 @@ public class SharingPizza2 {
 
         int answer = 0;
 
+        // Restrictions
         if (n >= 1 & n <= 100) {
 
             int conditionalValue = Math.min(6, n);
