@@ -13,7 +13,7 @@ public class FindingLocationOfPoint {
                 answer = 1;
             } else if(dot[0] < 0 & dot[1] > 0) {
                 answer = 2;
-            } else if(dot[0] > 0 & dot[1] < 0) {
+            } else if(dot[0] > 0) {
                 answer = 4;
             } else {
                 answer = 3;
