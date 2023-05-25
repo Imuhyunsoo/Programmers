@@ -14,9 +14,8 @@ public class Protractor {
             answer = 3;
         } else if(angle == 180) {
             answer = 4;
-        } else {
-            answer = 0;
         }
+
         return answer;
     }
 

@@ -4,23 +4,23 @@ public class RockPaperScissors {
 
     public static String getWinCase(String rsp) {
 
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
 
         // Restrictions
         if (rsp.length() > 0 & rsp.length() <= 100) {
 
             for (int i = 0; i < rsp.length(); i++) {
                 if (rsp.charAt(i) == '0') {
-                    answer += "5";
+                    answer.append("5");
                 } else if (rsp.charAt(i) == '2') {
-                    answer += "0";
+                    answer.append("0");
                 } else {
-                    answer += "2";
+                    answer.append("2");
                 }
             }
         }
 
-        return answer;
+        return answer.toString();
     }
 
     public static void main(String[] args) {

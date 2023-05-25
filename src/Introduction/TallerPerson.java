@@ -16,8 +16,8 @@ public class TallerPerson {
             // Restrictions
             if(array[0] >= 1 & array[array.length - 1] <= 200) {
 
-                for(int i = 0; i < array.length; i++) {
-                    if(array[i] > height) {
+                for (int j : array) {
+                    if (j > height) {
                         answer++;
                     }
                 }

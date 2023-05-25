@@ -4,17 +4,17 @@ public class CodeDecryption {
 
     public static String decode(String cipher, int code) {
 
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
 
         // Restrictions
         if (cipher.length() >= 1 & cipher.length() <= 1000 & code >= 1 & code <= cipher.length()) {
 
             for (int i = (code - 1); i < cipher.length(); i += code) {
-                answer += cipher.charAt(i);
+                answer.append(cipher.charAt(i));
             }
         }
 
-        return answer;
+        return answer.toString();
     }
 
     public static void main(String[] args) {

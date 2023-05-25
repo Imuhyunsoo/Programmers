@@ -4,7 +4,7 @@ public class ChangeIndexOfString {
 
     public static String changeStr(String my_string, int num1, int num2) {
 
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
 
         // Restrictions
         if (my_string.length() < 1 | my_string.length() > 100
@@ -18,16 +18,16 @@ public class ChangeIndexOfString {
         for (int i = 0; i < my_string.length(); i++) {
 
             if (i == num1) {
-                answer += lastTemp;
+                answer.append(lastTemp);
             } else if (i == num2) {
-                answer += firstTemp;
+                answer.append(firstTemp);
             } else {
-                answer += my_string.substring(i, i + 1);
+                answer.append(my_string.charAt(i));
             }
 
         }
 
-        return answer;
+        return answer.toString();
     }
 
     public static void main(String[] args) {

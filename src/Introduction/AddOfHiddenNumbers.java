@@ -11,10 +11,10 @@ public class AddOfHiddenNumbers {
         if(my_string.length() >= 1 & my_string.length() <= 1000) {
 
             for(int i = 0; i < my_string.length(); i++) {
-                for(int j = 0; j < numberArray.length; j++) {
+                for (String s : numberArray) {
 
-                    if(numberArray[j].equals(my_string.substring(i, i + 1)))  {
-                        answer += Integer.parseInt(my_string.substring(i, i+1));
+                    if (s.equals(my_string.substring(i, i + 1))) {
+                        answer += Integer.parseInt(my_string.substring(i, i + 1));
                     }
                 }
             }

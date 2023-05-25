@@ -10,8 +10,8 @@ public class BiggerNumber {
         int count = 0;
 
         // Restrictions
-        if (array.length < 1 & array.length > 100 &
-                Arrays.stream(array).min().getAsInt() < 1 & Arrays.stream(array).max().getAsInt() > 1000) {
+        if (array.length < 1 | array.length > 100 |
+                Arrays.stream(array).min().getAsInt() < 1 | Arrays.stream(array).max().getAsInt() > 1000) {
             return null;
         }
 

@@ -4,7 +4,7 @@ public class RemoveVowels {
 
     public static String stringToRemoveVowels(String my_string) {
 
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
         String[] strArray = my_string.split("");
         String[] vowels = {"a", "e", "i", "o", "u"};
         int j;
@@ -19,12 +19,12 @@ public class RemoveVowels {
                     }
                 }
                 if (j == 5) {
-                    answer += strArray[i];
+                    answer.append(strArray[i]);
                 }
             }
         }
 
-        return answer;
+        return answer.toString();
     }
 
     public static void main(String[] args) {

@@ -6,20 +6,20 @@ import java.util.List;
 
 public class MultipleOfNum {
 
-    public static int[] getMultipleList(int n, int[] numlist) {
+    public static int[] getMultipleList(int n, int[] numList) {
 
-        int[] answer = new int[numlist.length];
+        int[] answer = new int[numList.length];
         int count = 0;
 
 
         // Restrictions
-        if (n < 1 & n > 10000 & numlist.length < 1 & numlist.length > 100 &
-                Arrays.stream(numlist).min().getAsInt() < 1 &
-                Arrays.stream(numlist).max().getAsInt() < 100000) {
+        if (n < 1 | n > 10000 | numList.length < 1 | numList.length > 100 |
+                Arrays.stream(numList).min().getAsInt() < 1 |
+                Arrays.stream(numList).max().getAsInt() > 100000) {
             return null;
         }
 
-        for (int i : numlist) {
+        for (int i : numList) {
 
             if (i % n == 0) {
                 answer[count++] = i;
@@ -28,9 +28,7 @@ public class MultipleOfNum {
 
         int[] list = new int[count];
 
-        for (int i = 0; i < count; i++) {
-            list[i] = answer[i];
-        }
+        System.arraycopy(answer, 0, list, 0, count);
 
         return list;
     }
