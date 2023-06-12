@@ -1,0 +1,18 @@
+package CodingBasicTraining;
+
+import java.util.Scanner;
+
+public class OutputAAndB {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        // 制限事項
+        if (!(a < -100000 | b < -100000 | a > 100000 | b > 100000)) {
+            System.out.println("a = " + a + '\n' + "b = " + b);
+        }
+    }
+}
