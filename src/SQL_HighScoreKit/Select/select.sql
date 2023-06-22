@@ -81,3 +81,19 @@ SELECT DR_NAME, DR_ID, MCDP_CD, TO_CHAR(HIRE_YMD, 'YYYY-MM-DD') AS HIRE_YMD
 FROM DOCTOR
 WHERE MCDP_CD IN ('CS', 'GS')
 ORDER BY HIRE_YMD DESC, DR_NAME ASC;
+
+
+
+-- 조건에 맞는 도서 리스트 출력하기
+-- 条件に合わせる図書のリストを出力する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/144853?language=oracle
+
+-- 問題
+-- BOOK 테이블에서 2021년에 출판된 '인문' 카테고리에 속하는 도서 리스트를 찾아서 도서 ID(BOOK_ID), 출판일 (PUBLISHED_DATE)을
+-- 출력하는 SQL 문을 작성해주세요. 결과는 출판일을 기준으로 오름차순 정렬해주세요.
+
+SELECT BOOK_ID, TO_CHAR(PUBLISHED_DATE, 'YYYY-MM-DD')
+FROM BOOK
+WHERE EXTRACT(YEAR FROM PUBLISHED_DATE) LIKE '2021'
+  AND CATEGORY LIKE '인문'
+ORDER BY PUBLISHED_DATE ASC;
