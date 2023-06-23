@@ -97,3 +97,34 @@ FROM BOOK
 WHERE EXTRACT(YEAR FROM PUBLISHED_DATE) LIKE '2021'
   AND CATEGORY LIKE '인문'
 ORDER BY PUBLISHED_DATE ASC;
+
+
+
+-- 평균 일일 대여 요금 구하기
+-- 平均の一日の代用預金を求める
+-- https://school.programmers.co.kr/learn/courses/30/lessons/151136?language=oracle
+
+-- 問題
+-- CAR_RENTAL_COMPANY_CAR 테이블에서 자동차 종류가 'SUV' 인 자동차들의 평균 일일 대여 요금을 출력하는 SQL 문을 작성해주세요.
+-- 이때 평균 일일 대여 요금은 소수 첫 번째 자리에서 반올림하고, 컬럼명은 AVERAGE_FEE 로 지정해주세요.
+
+SELECT ROUND(AVG(DAILY_FEE),0)
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE CAR_TYPE LIKE 'SUV';
+
+
+
+-- 과일로 만든 아이스크림 고르기
+-- 果物で作ったアイスクリームを選ぶ
+-- https://school.programmers.co.kr/learn/courses/30/lessons/133025
+
+-- 問題
+-- 상반기 아이스크림 총주문량이 3,000보다 높으면서 아이스크림의 주 성분이 과일인
+-- 아이스크림의 맛을 총주문량이 큰 순서대로 조회하는 SQL 문을 작성해주세요.
+
+SELECT HALF.FLAVOR
+FROM  FIRST_HALF HALF, ICECREAM_INFO INFO
+WHERE HALF.FLAVOR = INFO.FLAVOR
+  AND TOTAL_ORDER > 3000
+  AND INGREDIENT_TYPE LIKE 'fruit_based'
+ORDER BY TOTAL_ORDER DESC;
