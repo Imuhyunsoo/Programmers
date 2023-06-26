@@ -176,7 +176,7 @@ ORDER BY ANIMAL_ID ASC;
 
 
 -- 재구매가 일어난 상품과 회원 리스트 구하기
--- 再購入が起きる商品と会員リスト出力
+-- 再購入が起きる商品と会員リスト求める
 -- https://school.programmers.co.kr/learn/courses/30/lessons/131536?language=oracle
 
 -- 問題
@@ -189,3 +189,17 @@ FROM ONLINE_SALE
 GROUP BY USER_ID, PRODUCT_ID
 HAVING COUNT(*) > 1
 ORDER BY USER_ID ASC, PRODUCT_ID DESC;
+
+
+
+-- 역순 정렬하기
+-- 逆順整列する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59035?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 모든 동물의 이름과 보호 시작일을 조회하는 SQL 문을 작성해주세요.
+-- 이때 결과는 ANIMAL_ID 역순으로 보여주세요.
+
+SELECT NAME, DATETIME
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID DESC;
