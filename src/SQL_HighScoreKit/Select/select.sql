@@ -159,3 +159,16 @@ ORDER BY AGE DESC, PT_NAME ASC;
 SELECT FLAVOR
 FROM FIRST_HALF
 ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC;
+
+
+
+-- 모든 레코드 조회하기
+-- すべてのレコードを紹介する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59034?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 모든 동물의 정보를 ANIMAL_ID 순으로 조회하는 SQL 문을 작성해주세요.
+
+SELECT *
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID ASC;
