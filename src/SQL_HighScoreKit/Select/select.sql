@@ -280,3 +280,16 @@ ORDER BY ANIMAL_ID ASC;
 SELECT ANIMAL_ID, NAME, DATETIME
 FROM ANIMAL_INS
 ORDER BY NAME ASC, DATETIME DESC;
+
+
+
+-- 상위 n개 레코드
+-- 上位n個レコード
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59405?language=oracle
+
+-- 問題
+-- 동물 보호소에 가장 먼저 들어온 동물의 이름을 조회하는 SQL 문을 작성해주세요.
+
+SELECT NAME
+FROM ANIMAL_INS
+WHERE DATETIME = (SELECT MIN(DATETIME) FROM ANIMAL_INS)
