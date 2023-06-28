@@ -293,3 +293,17 @@ ORDER BY NAME ASC, DATETIME DESC;
 SELECT NAME
 FROM ANIMAL_INS
 WHERE DATETIME = (SELECT MIN(DATETIME) FROM ANIMAL_INS)
+
+
+
+-- 조건에 맞는 회원수 구하기
+-- 条件に合う会員数求める
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131535
+
+-- 問題
+-- USER_INFO 테이블에서 2021년에 가입한 회원 중 나이가 20세 이상 29세 이하인 회원이 몇 명인지 출력하는 SQL 문을 작성해주세요.
+
+SELECT COUNT(*) AS USERS
+FROM USER_INFO
+WHERE EXTRACT(YEAR FROM JOINED) = 2021
+  AND AGE BETWEEN 20 AND 29;
