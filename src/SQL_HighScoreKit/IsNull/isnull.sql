@@ -52,3 +52,16 @@ ORDER BY ANIMAL_ID ASC;
 SELECT ANIMAL_TYPE, NVL(NAME, 'No name') AS NAME, SEX_UPON_INTAKE
 FROM ANIMAL_INS
 ORDER BY ANIMAL_ID ASC;
+
+
+
+-- 나이 정보가 없는 회원 수 구하기
+-- 年の情報がいない会員数を求める
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131528?language=oracle
+
+-- 問題
+-- USER_INFO 테이블에서 나이 정보가 없는 회원이 몇 명인지 출력하는 SQL문을 작성해주세요. 이때 컬럼명은 USERS로 지정해주세요.
+
+SELECT COUNT(*) AS USERS
+FROM USER_INFO
+WHERE AGE IS NULL;
