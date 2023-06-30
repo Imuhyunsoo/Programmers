@@ -31,3 +31,22 @@ FROM FIRST_HALF HALF, ICECREAM_INFO INFO
 WHERE HALF.FLAVOR = INFO.FLAVOR
 GROUP BY INFO.INGREDIENT_TYPE
 ORDER BY TOTAL_ORDER ASC;
+
+
+
+-- 식품분류별 가장 비싼 식품의 정보 조회하기
+-- 食品分類別一番高い食品の情報を照会
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131116?language=oracle
+
+-- 問題
+-- FOOD_PRODUCT 테이블에서 식품분류별로 가격이 제일 비싼 식품의 분류, 가격, 이름을 조회하는 SQL문을 작성해주세요.
+-- 이때 식품분류가 '과자', '국', '김치', '식용유'인 경우만 출력시켜 주시고 결과는 식품 가격을 기준으로 내림차순 정렬해주세요.
+
+SELECT MAX.CATEGORY, MAX.MAX_PRICE, FOOD.PRODUCT_NAME
+FROM (SELECT CATEGORY, MAX(PRICE) AS MAX_PRICE
+      FROM FOOD_PRODUCT
+      WHERE CATEGORY IN ('과자', '국', '김치', '식용유')
+      GROUP BY CATEGORY) MAX, FOOD_PRODUCT FOOD
+WHERE MAX.CATEGORY = FOOD.CATEGORY
+  AND MAX.MAX_PRICE = FOOD.PRICE
+ORDER BY MAX.MAX_PRICE DESC;
