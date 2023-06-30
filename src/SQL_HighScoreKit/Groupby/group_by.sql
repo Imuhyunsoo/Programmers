@@ -88,3 +88,21 @@ FROM (SELECT FOOD_TYPE, MAX(FAVORITES) AS FAVORITES
 WHERE MAX.FAVORITES = REST.FAVORITES
   AND MAX.FOOD_TYPE = REST.FOOD_TYPE
 ORDER BY FOOD_TYPE DESC;
+
+
+
+-- 조건에 맞는 사용자와 총 거래금액 조회하기
+-- 条件に合う使用者と総取引金額を照会する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/164668?language=oracle
+
+-- 問題
+-- USED_GOODS_BOARD와 USED_GOODS_USER 테이블에서 완료된 중고 거래의 총금액이 70만 원 이상인 사람의
+-- 회원 ID, 닉네임, 총거래금액을 조회하는 SQL문을 작성해주세요. 결과는 총거래금액을 기준으로 오름차순 정렬해주세요.
+
+SELECT WRITER_ID, NICKNAME, SUM(PRICE) AS TOTAL_PRICE
+FROM USED_GOODS_BOARD BOARD, USED_GOODS_USER USERS
+WHERE BOARD.WRITER_ID = USERS.USER_ID
+  AND STATUS LIKE 'DONE'
+GROUP BY WRITER_ID, NICKNAME
+HAVING SUM(PRICE) >= 700000
+ORDER BY TOTAL_PRICE ASC;
