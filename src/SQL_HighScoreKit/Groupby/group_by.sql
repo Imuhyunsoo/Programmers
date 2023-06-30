@@ -70,3 +70,21 @@ WHERE OPTIONS LIKE '%통풍시트%'
    OR OPTIONS LIKE '%가죽시트%'
 GROUP BY CAR_TYPE
 ORDER BY CAR_TYPE ASC;
+
+
+
+-- 즐겨찾기가 가장 많은 식당 정보 출력하기
+-- お気に入りが一番多い食堂の情報を出力する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131123?language=oracle
+
+-- 問題
+-- REST_INFO 테이블에서 음식종류별로 즐겨찾기수가 가장 많은 식당의 음식 종류, ID, 식당 이름, 즐겨찾기수를 조회하는 SQL문을 작성해주세요.
+-- 이때 결과는 음식 종류를 기준으로 내림차순 정렬해주세요.
+
+SELECT REST.FOOD_TYPE, REST_ID, REST_NAME, REST.FAVORITES
+FROM (SELECT FOOD_TYPE, MAX(FAVORITES) AS FAVORITES
+      FROM REST_INFO
+      GROUP BY FOOD_TYPE) MAX, REST_INFO REST
+WHERE MAX.FAVORITES = REST.FAVORITES
+  AND MAX.FOOD_TYPE = REST.FOOD_TYPE
+ORDER BY FOOD_TYPE DESC;
