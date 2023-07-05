@@ -128,3 +128,182 @@ WHERE HALF.FLAVOR = INFO.FLAVOR
   AND TOTAL_ORDER > 3000
   AND INGREDIENT_TYPE LIKE 'fruit_based'
 ORDER BY TOTAL_ORDER DESC;
+
+
+
+-- 12세 이하인 여자 환자 목록 출력하기
+-- 十二歳以下の女の患者さんのリスト出力
+-- https://school.programmers.co.kr/learn/courses/30/lessons/132201?language=oracle
+
+-- 問題
+-- PATIENT 테이블에서 12세 이하인 여자환자의 환자이름, 환자번호, 성별코드, 나이, 전화번호를 조회하는 SQL 문을 작성해주세요.
+-- 이때 전화번호가 없는 경우, 'NONE' 으로 출력시켜 주시고 결과는 나이를 기준으로 내림차순 정렬하고,
+-- 나이 같다면 환자이름을 기준으로 오름차순 정렬해주세요.
+
+SELECT PT_NAME, PT_NO, GEND_CD, AGE,  NVL(TLNO, 'NONE')
+FROM PATIENT
+WHERE AGE <= 12
+  AND GEND_CD LIKE 'W'
+ORDER BY AGE DESC, PT_NAME ASC;
+
+
+
+-- 인기있는 아이스크림
+-- 人気あるアイスプリム
+-- https://school.programmers.co.kr/learn/courses/30/lessons/133024?language=oracle
+
+-- 問題
+-- 상반기에 판매된 아이스크림의 맛을 총주문량을 기준으로 내림차순 정렬하고
+-- 총주문량이 같다면 출하 번호를 기준으로 오름차순 정렬하여 조회하는 SQL 문을 작성해주세요.
+
+SELECT FLAVOR
+FROM FIRST_HALF
+ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC;
+
+
+
+-- 모든 레코드 조회하기
+-- すべてのレコードを紹介する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59034?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 모든 동물의 정보를 ANIMAL_ID 순으로 조회하는 SQL 문을 작성해주세요.
+
+SELECT *
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID ASC;
+
+
+
+-- 재구매가 일어난 상품과 회원 리스트 구하기
+-- 再購入が起きる商品と会員リスト求める
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131536?language=oracle
+
+-- 問題
+-- ONLINE_SALE 테이블에서 동일한 회원이 동일한 상품을 재구매한 데이터를 구하여,
+-- 재구매한 회원 ID와 재구매한 상품 ID를 출력하는 SQL 문을 작성해주세요.
+-- 결과는 회원 ID를 기준으로 오름차순 정렬해주시고 회원 ID가 같다면 상품 ID를 기준으로 내림차순 정렬해주세요.
+
+SELECT USER_ID, PRODUCT_ID
+FROM ONLINE_SALE
+GROUP BY USER_ID, PRODUCT_ID
+HAVING COUNT(*) > 1
+ORDER BY USER_ID ASC, PRODUCT_ID DESC;
+
+
+
+-- 역순 정렬하기
+-- 逆順整列する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59035?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 모든 동물의 이름과 보호 시작일을 조회하는 SQL 문을 작성해주세요.
+-- 이때 결과는 ANIMAL_ID 역순으로 보여주세요.
+
+SELECT NAME, DATETIME
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID DESC;
+
+
+
+-- 오프라인/온라인 판매 데이터 통합하기
+-- オフライン/オンライン販売データ統合する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131537?language=oracle
+
+-- 問題
+-- ONLINE_SALE 테이블과 OFFLINE_SALE 테이블에서 2022년 3월의 오프라인/온라인 상품 판매 데이터의
+-- 판매 날짜, 상품 ID, 유저 ID, 판매량을 출력하는 SQL 문을 작성해주세요.
+-- OFFLINE_SALE 테이블의 판매 데이터의 USER_ID 값은 NULL 로 표시해주세요.
+-- 결과는 판매일을 기준으로 오름차순 정렬해주시고 판매일이 같다면 상품 ID를 기준으로 오름차순,
+-- 상품 ID 까지 같다면 유저 ID를 기준으로 오름차순 정렬해주세요.
+
+SELECT SALES_DATE, PRODUCT_ID, USER_ID, SALES_AMOUNT
+FROM (SELECT TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE, PRODUCT_ID, USER_ID, SALES_AMOUNT
+      FROM ONLINE_SALE
+      UNION ALL
+      SELECT TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE, PRODUCT_ID, NULL AS USER_ID, SALES_AMOUNT
+      FROM OFFLINE_SALE)
+WHERE SALES_DATE LIKE '2022-03%'
+ORDER BY SALES_DATE ASC, PRODUCT_ID ASC, USER_ID ASC;
+
+
+
+-- 아픈 동물 찾기
+-- 痛い動物探し
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59036?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 동물 중 아픈 동물의 아이디와 이름을 조회하는 SQL 문을 작성해주세요. 이때 결과는 아이디 순으로 조회해주세요.
+
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE INTAKE_CONDITION LIKE 'Sick'
+ORDER BY ANIMAL_ID ASC;
+
+
+
+-- 어린 동물 찾기
+-- 幼いの動物探し
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59037?language=oracle#fn1
+
+-- 問題
+-- 동물 보호소에 들어온 동물 중 젊은 동물의 아이디와 이름을 조회하는 SQL 문을 작성해주세요. 이때 결과는 아이디 순으로 조회해주세요.
+
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE INTAKE_CONDITION NOT LIKE 'Aged'
+ORDER BY ANIMAL_ID ASC;
+
+
+
+-- 동물의 아이디와 이름
+-- 動物のIDと名前
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59403?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 모든 동물의 아이디와 이름을 ANIMAL_ID 순으로 조회하는 SQL 문을 작성해주세요.
+
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID ASC;
+
+
+
+-- 여러 기준으로 정렬하기
+-- 色んな基準で整列する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59404?language=oracle
+
+-- 問題
+-- 동물 보호소에 들어온 모든 동물의 아이디와 이름, 보호 시작일을 이름 순으로 조회하는 SQL 문을 작성해주세요.
+-- 단, 이름이 같은 동물 중에서는 보호를 나중에 시작한 동물을 먼저 보여줘야 합니다.
+
+SELECT ANIMAL_ID, NAME, DATETIME
+FROM ANIMAL_INS
+ORDER BY NAME ASC, DATETIME DESC;
+
+
+
+-- 상위 n개 레코드
+-- 上位n個レコード
+-- https://school.programmers.co.kr/learn/courses/30/lessons/59405?language=oracle
+
+-- 問題
+-- 동물 보호소에 가장 먼저 들어온 동물의 이름을 조회하는 SQL 문을 작성해주세요.
+
+SELECT NAME
+FROM ANIMAL_INS
+WHERE DATETIME = (SELECT MIN(DATETIME) FROM ANIMAL_INS)
+
+
+
+-- 조건에 맞는 회원수 구하기
+-- 条件に合う会員数求める
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131535
+
+-- 問題
+-- USER_INFO 테이블에서 2021년에 가입한 회원 중 나이가 20세 이상 29세 이하인 회원이 몇 명인지 출력하는 SQL 문을 작성해주세요.
+
+SELECT COUNT(*) AS USERS
+FROM USER_INFO
+WHERE EXTRACT(YEAR FROM JOINED) = 2021
+  AND AGE BETWEEN 20 AND 29;
