@@ -1,0 +1,108 @@
+-- 저자 별 카테고리 별 매출액 집계하기
+-- 著者別、カテゴリー別、売上を集合する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/144856
+
+--　問題
+-- 2022년 1월의 도서 판매 데이터를 기준으로 저자 별, 카테고리 별 매출액(TOTAL_SALES = 판매량 * 판매가) 을 구하여,
+-- 저자 ID(AUTHOR_ID), 저자명(AUTHOR_NAME), 카테고리(CATEGORY), 매출액(SALES) 리스트를 출력하는 SQL 문을 작성해주세요.
+-- 결과는 저자 ID를 오름차순으로, 저자 ID가 같다면 카테고리를 내림차순 정렬해주세요.
+
+SELECT B.AUTHOR_ID, A.AUTHOR_NAME, B.CATEGORY, SUM(S.SALES * B.PRICE) AS TOTAL_SALES
+FROM BOOK B, AUTHOR A, BOOK_SALES S
+WHERE B.BOOK_ID = S.BOOK_ID
+  AND B.AUTHOR_ID = A.AUTHOR_ID
+  AND EXTRACT(YEAR FROM S.SALES_DATE) = 2022
+  AND EXTRACT(MONTH FROM S.SALES_DATE) = 01
+GROUP BY B.AUTHOR_ID, A.AUTHOR_NAME, B.CATEGORY
+ORDER BY B.AUTHOR_ID ASC, B.CATEGORY DESC;
+
+
+
+-- 성분으로 구분한 아이스크림 총 주문량
+-- 成分で区別したアイスの総注文量
+-- https://school.programmers.co.kr/learn/courses/30/lessons/133026?language=oracle
+
+-- 問題
+-- 상반기 동안 각 아이스크림 성분 타입과 성분 타입에 대한 아이스크림의 총주문량을 총주문량이 작은 순서대로 조회하는 SQL 문을 작성해주세요.
+-- 이때 총주문량을 나타내는 컬럼명은 TOTAL_ORDER로 지정해주세요.
+
+SELECT INFO.INGREDIENT_TYPE, SUM(HALF.TOTAL_ORDER) AS TOTAL_ORDER
+FROM FIRST_HALF HALF, ICECREAM_INFO INFO
+WHERE HALF.FLAVOR = INFO.FLAVOR
+GROUP BY INFO.INGREDIENT_TYPE
+ORDER BY TOTAL_ORDER ASC;
+
+
+
+-- 식품분류별 가장 비싼 식품의 정보 조회하기
+-- 食品分類別一番高い食品の情報を照会
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131116?language=oracle
+
+-- 問題
+-- FOOD_PRODUCT 테이블에서 식품분류별로 가격이 제일 비싼 식품의 분류, 가격, 이름을 조회하는 SQL문을 작성해주세요.
+-- 이때 식품분류가 '과자', '국', '김치', '식용유'인 경우만 출력시켜 주시고 결과는 식품 가격을 기준으로 내림차순 정렬해주세요.
+
+SELECT MAX.CATEGORY, MAX.MAX_PRICE, FOOD.PRODUCT_NAME
+FROM (SELECT CATEGORY, MAX(PRICE) AS MAX_PRICE
+      FROM FOOD_PRODUCT
+      WHERE CATEGORY IN ('과자', '국', '김치', '식용유')
+      GROUP BY CATEGORY) MAX, FOOD_PRODUCT FOOD
+WHERE MAX.CATEGORY = FOOD.CATEGORY
+  AND MAX.MAX_PRICE = FOOD.PRICE
+ORDER BY MAX.MAX_PRICE DESC;
+
+
+
+-- 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기
+-- 自動車の種類別、特定オプションが含まれた自動車の数求める
+-- https://school.programmers.co.kr/learn/courses/30/lessons/151137?language=oracle
+
+-- 問題
+-- CAR_RENTAL_COMPANY_CAR 테이블에서 '통풍시트', '열선시트', '가죽시트' 중 하나 이상의 옵션이 포함된 자동차가
+-- 자동차 종류 별로 몇 대인지 출력하는 SQL문을 작성해주세요.
+-- 이때 자동차 수에 대한 컬럼명은 CARS로 지정하고, 결과는 자동차 종류를 기준으로 오름차순 정렬해주세요.
+
+SELECT CAR_TYPE, COUNT(*) CARS
+FROM CAR_RENTAL_COMPANY_CAR
+-- WHERE OPTIONS REGEXP ('통풍시트|열선시트|가죽시트') BEST ANSWER
+WHERE OPTIONS LIKE '%통풍시트%'
+   OR OPTIONS LIKE '%열선시트%'
+   OR OPTIONS LIKE '%가죽시트%'
+GROUP BY CAR_TYPE
+ORDER BY CAR_TYPE ASC;
+
+
+
+-- 즐겨찾기가 가장 많은 식당 정보 출력하기
+-- お気に入りが一番多い食堂の情報を出力する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/131123?language=oracle
+
+-- 問題
+-- REST_INFO 테이블에서 음식종류별로 즐겨찾기수가 가장 많은 식당의 음식 종류, ID, 식당 이름, 즐겨찾기수를 조회하는 SQL문을 작성해주세요.
+-- 이때 결과는 음식 종류를 기준으로 내림차순 정렬해주세요.
+
+SELECT REST.FOOD_TYPE, REST_ID, REST_NAME, REST.FAVORITES
+FROM (SELECT FOOD_TYPE, MAX(FAVORITES) AS FAVORITES
+      FROM REST_INFO
+      GROUP BY FOOD_TYPE) MAX, REST_INFO REST
+WHERE MAX.FAVORITES = REST.FAVORITES
+  AND MAX.FOOD_TYPE = REST.FOOD_TYPE
+ORDER BY FOOD_TYPE DESC;
+
+
+
+-- 조건에 맞는 사용자와 총 거래금액 조회하기
+-- 条件に合う使用者と総取引金額を照会する
+-- https://school.programmers.co.kr/learn/courses/30/lessons/164668?language=oracle
+
+-- 問題
+-- USED_GOODS_BOARD와 USED_GOODS_USER 테이블에서 완료된 중고 거래의 총금액이 70만 원 이상인 사람의
+-- 회원 ID, 닉네임, 총거래금액을 조회하는 SQL문을 작성해주세요. 결과는 총거래금액을 기준으로 오름차순 정렬해주세요.
+
+SELECT WRITER_ID, NICKNAME, SUM(PRICE) AS TOTAL_PRICE
+FROM USED_GOODS_BOARD BOARD, USED_GOODS_USER USERS
+WHERE BOARD.WRITER_ID = USERS.USER_ID
+  AND STATUS LIKE 'DONE'
+GROUP BY WRITER_ID, NICKNAME
+HAVING SUM(PRICE) >= 700000
+ORDER BY TOTAL_PRICE ASC;
